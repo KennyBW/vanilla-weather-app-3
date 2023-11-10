@@ -8,7 +8,7 @@ font-family: 'Roboto Mono', monospace;
     background: white;
     max-width: 600px;
     margin: 30px auto;
-    box-shadow: 0 30px 50px rgba(65, 50, 100, 0.o8);
+    box-shadow: 0 30px 50px rgba(65, 50, 100, 0.08);
     border-radius: 16px;
     padding: 30px;
 }
@@ -65,23 +65,26 @@ main{
     font-weight: 500;
 }
 
-.weather-app-details-strong{
-    color: #f65282;
+.strong{
+color:#f65282
 }
 
 .weather-app-temperature-container{
 display: flex;
+font-weight: bold;
+font-weight: 22px;
 }
 
 .weater-app-temperature{
     font-size: 88px;
     margin-left: 10px;
-    font-weight: bold;
+    font-weight: bold; 
 }
 
 .weather-app-icon{
     font-size: 44px;
-    margin-top: 22px;
+    margin-right: 10px;
+    margin-top: 16px;
 }
 
 .weather-app-unit{
@@ -90,6 +93,83 @@ display: flex;
 }
 
 
+  
 
+/*.box-1 {
+  margin: 10px;
+}
+
+/* Margin left only */
+/*.box-2 {
+    margin-left: 10px;
+  }
+  
+  /* 10px margin on top and bottom, 5px on the sides */
+  /*.box-3 {
+    margin: 10px 5px;
+  }
+  
+  /* 20px margin top, 15px margin right, 10px margin bottom and 5px margin left */
+  /*.box-4 {
+    margin: 20px 15px 10px 5px;
+  }
+  Space outside an element.
+  
+  More info
+  
+  
+  CSS
+  Line height
+  h1 {
+    line-height: 28px;
+  }
+  
+  p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  Note: We generally use a multiplier such as 1.5 which making the line height 1.5 times higher than the font size
+  
+  More info
+  
+  
+  CSS
+  Position
+  .heading {
+    position: relative;
+    top: -10px;
+    left: 20px;
+  }
+  Note: Position can be static | relative | fixed | absolute | sticky. By default, elements are static.
+  
+  More info
+  
+  
+  CSS
+  Font size
+  body {
+    font-size: 18px;
+  }
+  More info
+  
+  
+  CSS
+  Font weight
+  h1 {
+    font-weight: normal;
+  }
+  
+  p {
+    font-weight: 700;
+  }
+  
+  a {
+    font-weight: 100;
+  }
+  Note: font-weight: normal | bold | bolder | lighter | number | initial | inherit; It can also be a value between 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 where 100 is thin and 900 is extra bold
+  
+  More info*/
+  
+  
 
 
