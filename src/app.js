@@ -1,5 +1,5 @@
 function refreshWeather(response){
-    let temperatureElement=document.querySelector("#temperature");
+    let temperatureElement = document.querySelector("#temperature");
     let temperature = response.data.temperature.current;
     let cityElement = document.querySelector("#city");
     
@@ -9,7 +9,7 @@ function refreshWeather(response){
 
 function searchCity(city) {
     //make API call and update the interface
-    let apiKey = "8ba535df7ba0c99fc9b12dd999becbec";
+    let apiKey ="8ba535df7ba0c99fc9b12dd999becbec";
 
    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
 axios.get(apiUrl).then(refreshWeather);
@@ -23,10 +23,6 @@ function handleSearchSubmit(event) {
     searchCity(searchInput.value);
 
 }
-   /* let searchInput = document.querySelector("#search-form-input");
-let cityElement = document.querySelector("#city");
-cityElement.innerHTML = searchInput.value;
-searchCity(searchInput.value);*/
 
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
