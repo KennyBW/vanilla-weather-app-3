@@ -9,7 +9,7 @@ function refreshWeather(response){
 
 function searchCity(city) {
     //make API call and update the interface
-    let apiKey ="8ba535df7ba0c99fc9b12dd999becbec";
+    let apiKey ="";
 
    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
 axios.get(apiUrl).then(refreshWeather);
