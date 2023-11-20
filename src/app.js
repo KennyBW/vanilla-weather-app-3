@@ -58,32 +58,30 @@ let searchInput = document.querySelector("#search-form-input");
 }
 
 function displayForecast() {
-let days = ['Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
-let forecastHtml = "";
+let days = ["Tue", "Wed", "Thur", "Fri", "Sat"];
+let forecastHTML = `<div class ="row">`;
 
 days.forEach(function (day) {
-  forecastHtml = 
-  forecastHtml +
+  forecastHTML = 
+  forecastHTML +
   `
-  <div class="weather-forecast-day">
+  <div class=" col weather-forecast-day">
   <div class="weather-forecast-date">${day}</div>
   <div class="weather-forecast-icon">⛅</div>
   <div class="weather-forecast-temperatures">
       <div class="weather-forecast-temperature">
-  18°
-</span>
-  <span class="weather-forecast-temperature-min">
-      12°
-  </span>
-      </div>
+ 
+  <span class="weather-forecast-temperature-max">18°</span>
+  <span class="weather-forecast-temperature-min">12°</span>
   </div>
-</div>
+  </div>
 </div>
 `;
 });
 
+forecastHTML = forecastHTML + `<div>`;
 let forecastElement = document.querySelector("#forecast");
-forecastElement.innerHTML = forecastHtml;
+forecastElement.innerHTML = forecastHTML;
 }
 
 let searchFormElement = document.querySelector("#search-form");
