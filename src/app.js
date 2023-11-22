@@ -18,6 +18,7 @@ let iconElement = document.querySelector("#icon");
     temperatureElement.innerHTML = Math.round(temperature);
     iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon" />`;
 
+    getForecast(response.data.city);
 }
 
 function formatDate(date) {
@@ -54,10 +55,17 @@ event.preventDefault();
 let searchInput = document.querySelector("#search-form-input");
 
     searchCity(searchInput.value);
-
 }
 
-function displayForecast() {
+function getForecast(city) {
+let apiKey ="1a747f2d7ac32a100bt13fab8776o6ca";
+let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apikey}&units=metric`;
+axios(apiUrl).then(displayForecast);
+}
+
+function displayForecast(response) {
+console.log(response.data);
+
 let days = ["Tue", "Wed", "Thur", "Fri", "Sat"];
 let forecastHTML = `<div class ="row">`;
 
@@ -79,7 +87,7 @@ days.forEach(function (day) {
 `;
 });
 
-forecastHTML = forecastHTML + `<div>`;
+forecastHTML = forecastHTML +`<div>`;
 let forecastElement = document.querySelector("#forecast");
 forecastElement.innerHTML = forecastHTML;
 }
@@ -88,7 +96,7 @@ let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
 searchCity("Perth")
-displayForecast();
+getForecast("Perth");
 
 
 
