@@ -47,7 +47,7 @@ function searchCity(city) {
     let apiKey ="1a747f2d7ac32a100bt13fab8776o6ca";
 
    let apiUrl = 
-   `https://api.shecodes.io/weather/v1/?query=${city}&key=${apiKey}`;
+   `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
  axios.get(apiUrl).then(refreshWeather);
 }
 
@@ -58,6 +58,14 @@ let searchInput = document.querySelector("#search-form-input");
     searchCity(searchInput.value);
 }
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[date.getDay()];
+}
+
+
 function getForecast(city) {
 let apiKey ="1a747f2d7ac32a100bt13fab8776o6ca";
 let apiUrl = 
@@ -66,27 +74,26 @@ axios(apiUrl).then(displayForecast);
 }
 
 function displayForecast(response) {  
-console.log(response.data);
-
-let days = ["Tue", "Wed", "Thur", "Fri", "Sat"];
 let forecastHTML = `<div class ="row">`;
 
-days.forEach(function (day) {
+response.data.daily.forEach(function (day, index) {
+  if (index > 5) {
   forecastHTML = 
   forecastHTML +
   `
   <div class=" col weather-forecast-day">
-  <div class="weather-forecast-date">${day}</div>
-  <div class="weather-forecast-icon">⛅</div>
+  <div class="weather-forecast-date">${formatDay(day.time)}</div>
+
+  <img src="${day.condition.icon_url}" class="weather-forecast-icon" />
   <div class="weather-forecast-temperatures">
       <div class="weather-forecast-temperature">
- 
-  <span class="weather-forecast-temperature-max">18°</span>
-  <span class="weather-forecast-temperature-min">12°</span>
+ <span>${Math.round(day.temperature.maximum)}°</span>
+  <span class="weather-forecast-temperature-min">${Math.round(day.temperature.minimum)}°</span>
   </div>
   </div>
 </div>
 `;
+  }
 });
 
 forecastHTML = forecastHTML +`<div>`;
@@ -97,8 +104,7 @@ forecastElement.innerHTML = forecastHTML;
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
-searchCity("Perth")
-getForecast("Perth");
+searchCity("Perth");
 
 
 
