@@ -1,61 +1,61 @@
 function refreshWeather(response){
-    let temperatureElement = document.querySelector("#temperature");
-    let temperature = response.data.temperature.current;
-    let cityElement = document.querySelector("#city");
-    let descriptionElement = document.querySelector("#description");
-    let humidityElement = document.querySelector("#humidity");
+  let temperatureElement = document.querySelector("#temperature");
+  let temperature = response.data.temperature.current;
+  let cityElement = document.querySelector("#city");
+  let descriptionElement = document.querySelector("#description");
+  let humidityElement = document.querySelector("#humidity");
 let windSpeedElement = document.querySelector("#wind-speed");
 let timeElement = document.querySelector("#time");
 let date = new Date(response.data.time * 1000);
 let iconElement = document.querySelector("#icon");
-    
+  
 
-    cityElement.innerHTML = response.data.city;
-    timeElement.innerHTML = formatDate(date);
-    descriptionElement.innerHTML = response.data.condition.description;
-    humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
-    windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
-    temperatureElement.innerHTML = Math.round(temperature);
-    iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon" />`;
+  cityElement.innerHTML = response.data.city;
+  timeElement.innerHTML = formatDate(date);
+  descriptionElement.innerHTML = response.data.condition.description;
+  humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
+  windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
+  temperatureElement.innerHTML = Math.round(temperature);
+  iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon" />`;
 
-    getForecast(response.data.city);
+  getForecast(response.data.city);
 }
 
 function formatDate(date) {
-    let minutes = date.getMinutes();
-    let hours = date.getHours();
-    let days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-    let day = days[date.getDay()];
-  
-    if (minutes < 10) {
-      minutes = `0${minutes}`;
-    }
-  
-    return `${day} ${hours}:${minutes}`;
+  let minutes = date.getMinutes();
+  let hours = date.getHours();
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let day = days[date.getDay()];
+
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
   }
 
-function searchCity(city) {
-    //make API call and update the interface
-    let apiKey ="1a747f2d7ac32a100bt13fab8776o6ca";
+  return `${day} ${hours}:${minutes}`;
+}
 
-   let apiUrl = 
-   `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
- axios.get(apiUrl).then(refreshWeather);
+function searchCity(city) {
+  //make API call and update the interface
+  let apiKey ="1a747f2d7ac32a100bt13fab8776o6ca";
+
+ let apiUrl = 
+ `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
+axios.get(apiUrl).then(refreshWeather);
 }
 
 function handleSearchSubmit(event) {
 event.preventDefault();
 let searchInput = document.querySelector("#search-form-input");
 
-    searchCity(searchInput.value);
+  searchCity(searchInput.value);
 }
 
 function formatDay(timestamp) {
@@ -65,7 +65,6 @@ function formatDay(timestamp) {
   return days[date.getDay()];
 }
 
-
 function getForecast(city) {
 let apiKey ="1a747f2d7ac32a100bt13fab8776o6ca";
 let apiUrl = 
@@ -74,23 +73,23 @@ axios(apiUrl).then(displayForecast);
 }
 
 function displayForecast(response) {  
-let forecastHTML = `<div class ="row">`;
+ let forecastHTML = `<div class ="row">`;
 
 response.data.daily.forEach(function (day, index) {
-  if (index > 5) {
-  forecastHTML = 
-  forecastHTML +
-  `
-  <div class=" col weather-forecast-day">
-  <div class="weather-forecast-date">${formatDay(day.time)}</div>
+  if (index < 5) {
+forecastHTML = 
+forecastHTML +
+`
+<div class=" col weather-forecast-day">
+<div class="weather-forecast-date">${formatDay(day.time)}</div>
 
-  <img src="${day.condition.icon_url}" class="weather-forecast-icon" />
-  <div class="weather-forecast-temperatures">
-      <div class="weather-forecast-temperature">
- <span>${Math.round(day.temperature.maximum)}°</span>
-  <span class="weather-forecast-temperature-min">${Math.round(day.temperature.minimum)}°</span>
-  </div>
-  </div>
+<img src="${day.condition.icon_url}" class="weather-forecast-icon" />
+<div class="weather-forecast-temperatures">
+<div class="weather-forecast-temperature">
+<span>${Math.round(day.temperature.maximum)}°</span>
+</div>
+<div class="weather-forecast-temperature">${Math.round(day.temperature.minimum)}°</div>
+</div>
 </div>
 `;
   }
@@ -104,19 +103,5 @@ forecastElement.innerHTML = forecastHTML;
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
-searchCity("Perth");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+searchCity("Perth")
 
